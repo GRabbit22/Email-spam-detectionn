@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MailGuard | AI Spam Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">✉ MailGuard<span>AI</span></div>
+        <div class="nav-tag">MACHINE LEARNING PROJECT</div>
+    </nav>
+
+    <main class="main">
+        <div class="hero">
+            <div class="tag">● AI POWERED EMAIL SECURITY</div>
+            <h1>Smart Email <span>Spam Detection</span></h1>
+            <p>Analyze your email messages instantly using Machine Learning.
+               Identify unwanted messages before they reach your inbox.</p>
+        </div>
+
+        <section class="detector">
+            <div class="section-heading">
+                <div>
+                    <h2>Email Analyzer</h2>
+                    <p>Paste your email content below</p>
+                </div>
+                <span class="secure">🔒 Secure Analysis</span>
+            </div>
+
+            <form method="POST">
+                <label for="email">EMAIL MESSAGE</label>
+                <textarea id="email" name="email"
+                    placeholder="Paste your email subject and message here..."
+                    required>{{ email_text }}</textarea>
+
+                <div class="form-footer">
+                    <span>✦ AI-based classification</span>
+                    <button type="submit">Analyze Email →</button>
+                </div>
+            </form>
+
+            {% if prediction %}
+            <div class="result {{ 'spam' if prediction == 'spam' else 'ham' }}">
+                <div class="result-icon">
+                    {{ '⚠' if prediction == 'spam' else '✓' }}
+                </div>
+                <div>
+                    <small>ANALYSIS RESULT</small>
+                    <h2>{{ prediction | upper }}</h2>
+                    <p>
+                        {% if prediction == 'spam' %}
+                        This email has been classified as potentially unwanted.
+                        {% else %}
+                        This email has been classified as legitimate.
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+        </section>
+
+        <div class="features">
+            <div class="feature">
+                <span>🧠</span>
+                <h3>Naive Bayes</h3>
+                <p>Machine learning classification</p>
+            </div>
+            <div class="feature">
+                <span>📊</span>
+                <h3>33K+ Emails</h3>
+                <p>Training dataset</p>
+            </div>
+            <div class="feature">
+                <span>⚡</span>
+                <h3>Instant Results</h3>
+                <p>Real-time email analysis</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>MailGuard AI | Email Spam Detection System</p>
+            <p>Powered by Python & Flask</p>
+        </footer>
+    </main>
+</body>
+</html>
